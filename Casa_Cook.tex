@@ -1777,10 +1777,9 @@ plotms(vis=msfile,
 \end{verbatim}
 \end{casacmd}
 
-You will have noticed in plotms that the bandpass appears to be
-relatively flat across this channel range, so we can in fact use all of
-the channels.  Note that this is not the case for the wider HI modes.
-You may find solutions failing if you use too large a channel range.
+You will have noticed in plotms that the bandpass appears to be relatively flat across this channel
+range, so we can in fact use all of the channels.  Note that this is not the case for the wider HI
+modes.  You may find solutions failing if you use too large a channel range.
 
 \begin{casacmd}
 \begin{verbatim}
@@ -1813,15 +1812,12 @@ plotcal(caltable = gtable0,
 \end{verbatim}
 \end{casacmd}
 
-All looks good, so lets continue on to the bandpass calibration. We have
-found that in general, we do not need to do a time-dependent bandpass
-calibration for KAT-7, even though we visit the bandpass calibrator
-every hour in these observations (just in case), so we average over all
-of the bandpass scans to increase our signal-to-noise ratio.  To start
-with, we are going to use the normal 'per channel' bandpass solution ie
-{\tt bandtype='B'}. However, if the solutions turn out to be very noisy,
-it may be better to use a polynomial fit to the bandpass {\tt
-bandtype='BPOLY'}
+All looks good, so lets continue on to the bandpass calibration. We have found that in general, we do
+not need to do a time-dependent bandpass calibration for KAT-7, even though we visit the bandpass
+calibrator every hour in these observations (just in case), so we average over all of the bandpass
+scans to increase our signal-to-noise ratio.  To start with, we are going to use the normal 'per
+channel' bandpass solution ie {\tt bandtype='B'}. However, if the solutions turn out to be very noisy,
+it may be better to use a polynomial fit to the bandpass {\tt bandtype='BPOLY'}
 
 \begin{casacmd}
 \begin{verbatim}
@@ -1839,9 +1835,8 @@ bandpass(vis = msfile,
 \end{verbatim}
 \end{casacmd}
 
-If you are using CASA 4.1 and above, there is a new task to plot
-bandpasses. This will enable you to see both the amplitude and phase,
-and overplot polynomial solutions.
+If you are using CASA 4.1 and above, there is a new task to plot bandpasses. This will enable you to
+see both the amplitude and phase, and overplot polynomial solutions (Figure~\ref{fig:plotbandpass_b}).
 
 \begin{casacmd}
 \begin{verbatim}
@@ -1859,13 +1854,11 @@ plotbandpass(caltable = btable0,
   \label{fig:plotbandpass_b}
 \end{figure}
 
-The problem with such narrow band observations is that we have increased
-noise.  Not that the peak-to-peak amplitude variation is about 10\% and
-the phase variation is about 8 degrees.  However, there is not much
-variation in the bandpass, so we can use a polynomial-based bandpass
-calibration. Note below that we change bandtype to {\tt 'BPOLY'}. We can
-specify different orders of polynomial fit for the phase and amplitude
-if necessary.
+The problem with such narrow band observations is that we have increased noise.  Note that the
+peak-to-peak amplitude variation is about 10\% and the phase variation is about 8 degrees.  However,
+there is not much variation in the bandpass, so we can use a polynomial-based bandpass calibration.
+Note below that we change bandtype to {\tt 'BPOLY'}. We can specify different orders of polynomial fit
+for the phase and amplitude if necessary (Figure~\ref{fig:plotbandpass_bpoly}).
 
 \begin{casacmd}
 \begin{verbatim}
@@ -1893,25 +1886,20 @@ bandpass(vis=msfile,
   \label{fig:plotbandpass_bpoly}
 \end{figure}
 
-Why is the bandpass calibration so important?  In spectral line
-observations we are interested in source structure as a function of
-frequency, so we want to remove any spurious variations due to the
-instrumental response. We may also want to subtract off continuum
-emission in order to simplify our imaging and in this case we don't want
-there to be any residual continuum emission. How do we know if we have
-sufficient signal to noise in our bandpass calibrator?
-We typically want the rms noise from the calibrator to be much less
-than the noise in the source.  We use calibrators with reasonably high
-flux density, but spend less time on them than we do on our target
-sources, so its good to review whether your observations satisfy the
-criterion that $I_{cal} \sqrt{t_{cal}}$ should be significantly
-greater than $I_{target}\sqrt{t_{target}}$. In the case of this
-observation, the target actually has quite a high continuum flux, and
-it will not be possible to meet this requirement without spending an
+Why is the bandpass calibration so important?  In spectral line observations we are interested in
+source structure as a function of frequency, so we want to remove any spurious variations due to the
+instrumental response. We may also want to subtract off continuum emission in order to simplify our
+imaging and in this case we don't want there to be any residual continuum emission. How do we know if
+we have sufficient signal to noise in our bandpass calibrator?  We typically want the rms noise from
+the calibrator to be much less than the noise in the source.  We use calibrators with reasonably high
+flux density, but spend less time on them than we do on our target sources, so its good to review
+whether your observations satisfy the criterion that $I_{cal} \sqrt{t_{cal}}$ should be significantly
+greater than $I_{target}\sqrt{t_{target}}$. In the case of this observation, the target actually has
+quite a high continuum flux, and it will not be possible to meet this requirement without spending an
 impractical amount of time on the bandpass calibrator.
 
-Now we calibrate the gain on our flux calibrator, which in this
-observation happens to also be our bandpass calibrator.
+Now we calibrate the gain on our flux calibrator, which in this observation happens to also be our
+bandpass calibrator.
 
 \begin{casacmd}
 \begin{verbatim}
@@ -1955,8 +1943,8 @@ plotcal(caltable = gtable1,
 \end{verbatim}
 \end{casacmd}
 
-Calibrate the gains on the phase calibrator. Note that we append the
-solutions to the table containing the gains on the flux calibrator.
+Calibrate the gains on the phase calibrator. Note that we append the solutions to the table containing
+the gains on the flux calibrator.
 
 \begin{casacmd}
 \begin{verbatim}
@@ -1975,10 +1963,9 @@ gaincal(vis = msfile,
 \end{verbatim}
 \end{casacmd}
 
-As usual, check the gain solutions and make sure that there's nothing
-nasty going on.  Next, we transfer the flux scale from our flux
-calibrator to the gain calibrator. This will automatically transfer the
-flux calibration to the target when we apply the calibrations.
+As usual, check the gain solutions and make sure that there's nothing nasty going on.  Next, we
+transfer the flux scale from our flux calibrator to the gain calibrator. This will automatically
+transfer the flux calibration to the target when we apply the calibrations.
 
 \begin{casacmd}
 \begin{verbatim}
@@ -1990,7 +1977,7 @@ fluxscale(vis=msfile,
 \end{verbatim}
 \end{casacmd}
 
-\bigskip
+% \bigskip
 
 \begin{casaoutput}
 \begin{verbatim}
@@ -2013,8 +2000,8 @@ Writing solutions to table: G330_OH.fluxscale1
 \end{verbatim}
 \end{casaoutput}
 
-Check that the derived flux is close to what is expected.  Now we are
-ready to apply the calibration and get ready for imaging.
+Check that the derived flux is close to what is expected.  Now we are ready to apply the calibration
+and get ready for imaging.
 
 \begin{casacmd}
 \begin{verbatim}
@@ -2040,44 +2027,34 @@ split(vis = msfile,
 
 \section{Velocity rest frames}
 
-There are a few things that you need to do before you can dive in and
-start cleaning your image.  Since spectral line observations give us a
-lot of information about velocities of the objects that we are
-observing, it is important to be clear on what reference frames we are
-using.  The apparent frequency of a source, also known as the 'sky
-frequency', is influenced by Earth's rotation and revolution around the
-Sun, the motion of our Solar System around the Galaxy, the movement of
-our Galaxy within the Local Group and there is also motion against the
-cosmic microwave background.  The various rest frames are listed in
-Table~\ref{tab:rest_frames}. At L-band, the sky frequency change by up
-to 0.15 MHz during the course of a year.
+There are a few things that you need to do before you can dive in and start cleaning your image.
+Since spectral line observations give us a lot of information about velocities of the objects that we
+are observing, it is important to be clear on what reference frames we are using.  The apparent
+frequency of a source, also known as the 'sky frequency', is influenced by Earth's rotation and
+revolution around the Sun, the motion of our Solar System around the Galaxy, the movement of our
+Galaxy within the Local Group and there is also motion against the cosmic microwave background.  The
+various rest frames are listed in Table~\ref{tab:rest_frames}. At L-band, the sky frequency change by
+up to 0.15 MHz during the course of a year.
 
-The KAT-7 system does not do any Doppler corrections, so its rest frame
-is \textbf{topocentric}.  The actual sky frequency of your source will
-vary from day to day and if you are observing with high frequency
-resolution, you may even see your spectral line shifting during the
-course of a single day's observation.  This is definitely the case for
-these hydroxyl maser observations.  We have a velocity resolution of 68
-m/s so we do see the source Doppler-shifted by Earth's rotation.
+The KAT-7 system does not do any Doppler corrections, so its rest frame is \textbf{topocentric}.  The
+actual sky frequency of your source will vary from day to day and if you are observing with high
+frequency resolution, you may even see your spectral line shifting during the course of a single day's
+observation.  This is definitely the case for these hydroxyl maser observations.  We have a velocity
+resolution of 68 m/s so we do see the source Doppler-shifted by Earth's rotation.
 
-You will usually want to have your final data cubes output into a
-different rest frame. The velocity frame to use depends on your science.
-In the case of this dataset, we are looking at a Galactic star formation
-region.  It is meaningfull in this case to work in the \textbf{Local
-Standard of Rest (LSR) frame}.  There are actually two definitions of
-LSR, the kinematic LSR (LSRK) and dynamic LSR (LSRD).  Most of the time
-LSRK is used and is generally synomynous with LSR.  The other commonly
-used rest frame is \textbf{barycentric}, and has mostly replaced the old
-heliocentric standard.
+You will usually want to have your final data cubes output into a different rest frame. The velocity
+frame to use depends on your science.  In the case of this dataset, we are looking at a Galactic star
+formation region.  It is meaningfull in this case to work in the \textbf{Local Standard of Rest (LSR)
+frame}.  There are actually two definitions of LSR, the kinematic LSR (LSRK) and dynamic LSR (LSRD).
+Most of the time LSRK is used and is generally synomynous with LSR.  The other commonly used rest
+frame is \textbf{barycentric}, and has mostly replaced the old heliocentric standard.
 
-There are two ways to change rest frames in CASA.  The CLEAN task can
-change the reference frame of the spectral axis which is fine if you
-don't have to worry about doppler shifts during the course of the
-observation.  CVEL is a more general spectral regridding tool, which
-enables you to correct for Doppler shifts, or change the channelisation
-on your data prior to to imaging.  Doing the spectral regridding before
-running CLEAN can save you time if you think you are going to be trying
-different imaging settings.
+There are two ways to change rest frames in CASA.  The CLEAN task can change the reference frame of
+the spectral axis which is fine if you don't have to worry about doppler shifts during the course of
+the observation.  CVEL is a more general spectral regridding tool, which enables you to correct for
+Doppler shifts, or change the channelisation on your data prior to imaging.  Doing the spectral
+regridding before running CLEAN can save you time if you think you are going to be trying different
+imaging settings.
 
 \begin{table}
 \caption{Velocity rest frames}
@@ -2115,20 +2092,16 @@ Background &   & motion & \\
 
 \info{You can use the viewer to look at visibilities. Lets try it now.}
 
-Figure~\ref{fig:doppler} shows a pretty severe shift over the course of
-the observations.  If we had to image this dataset without correcting
-for the Doppler shift, we would end up blending our spectral features
-together. We are going to be using CVEL to correct for the doppler
-shift, and at the same time, change the velocity reference frame to the
-Local Standard of Rest ($V_{LSR}$).  Before we do that, we need to set
-the line rest frequency in the measurement set.  The KAT-7 observation
-framework does not make provision for setting the rest frequency in the
-data files so we shall have to do it manually.  The rest frequency for
-this transition of OH is 1665.40184 MHz. We are going to open the
-spectral window table and insert the rest frequency.  The default rest
-frequency in the file is usually the central observing frequency.
-Remember to close the file before continuing because it will be locked
-until you do.
+Figure~\ref{fig:doppler} shows a pretty severe shift over the course of the observations.  If we had
+to image this dataset without correcting for the Doppler shift, we would end up blending our spectral
+features together. We are going to be using CVEL to correct for the doppler shift, and at the same
+time, change the velocity reference frame to the Local Standard of Rest ($V_{LSR}$).  Before we do
+that, we need to set the line rest frequency in the measurement set.  The KAT-7 observation framework
+does not make provision for setting the rest frequency in the data files so we shall have to do it
+manually.  The rest frequency for this transition of OH is 1665.40184 MHz. We are going to open the
+spectral window table and insert the rest frequency.  The default rest frequency in the file is
+usually the central observing frequency.  Remember to close the file before continuing because it will
+be locked until you do.
 
 \begin{figure}
   \includegraphics[width=\textwidth]{images/doppler_shift}
@@ -2148,8 +2121,8 @@ tb.close()
 \end{verbatim}
 \end{casacmd}
 
-If run {\tt listobs} now you should see that the reference frequency has
-changed.  Next we run {\tt cvel}.
+If run {\tt listobs} now you should see that the reference frequency has changed.  Next we run {\tt
+cvel}.
 
 \begin{casacmd}
 \begin{verbatim}
@@ -2171,46 +2144,36 @@ cvel(vis = split_outputvis,
   \label{fig:doppler_corrected}
 \end{figure}
 
-This can take some time for a large dataset.  If you find yourself
-running low on disk space, you can now delete the split file since we
-will use the cvel file from now on. Have a look at the spectral lines
-using the viewer and convince yourself that we have removed the doppler
-shift. In Figure~\ref{fig:doppler_corrected} you will see that the
-spectral lines now stay in the same channel.  Note that some of the edge
-channels are now missing data.  Make sure that you have split off
-sufficient channels to account for this before you apply cvel.  We will
-lose about 10 channels in this process. When you clean your datacube,
-you should make sure that these channels are not included. I generally
-avoid this problem by setting the start velocity and number of channels
-for the output from cvel such that I cover only the channels that I want
-to image.  This trick works well if you have observations spread over
-more than a month, because the channel in which a particular velocity
-will be present will vary over the year.  This brings your data into a
-common reference frame with consistent channel numbers. If you don't
-know what these parameters should be, you can run cvel on the full
-channel range, then examine the resulting file and rerun cvel with a
-smaller output range once you know which velocity range is of interest.
-Remember to leave sufficient line-free channels on either side of your
-dataset for continuum subtraction.
+This can take some time for a large dataset.  If you find yourself running low on disk space, you can
+now delete the split file since we will use the cvel file from now on. Have a look at the spectral
+lines using the viewer and convince yourself that we have removed the doppler shift. In
+Figure~\ref{fig:doppler_corrected} you will see that the spectral lines now stay in the same channel.
+Note that some of the edge channels are now missing data.  Make sure that you have split off
+sufficient channels to account for this before you apply cvel.  We will lose about 10 channels in this
+process. When you clean your datacube, you should make sure that these channels are not included. I
+generally avoid this problem by setting the start velocity and number of channels for the output from
+cvel such that I cover only the channels that I want to image.  This trick works well if you have
+observations spread over more than a month, because the channel in which a particular velocity will be
+present will vary over the year.  This brings your data into a common reference frame with consistent
+channel numbers. If you don't know what these parameters should be, you can run cvel on the full
+channel range, then examine the resulting file and rerun cvel with a smaller output range once you
+know which velocity range is of interest.  Remember to leave sufficient line-free channels on either
+side of your dataset for continuum subtraction.
 
 
 \section{Continuum subtraction}
 
-This particular field is of a massive star formation region.  The one
-degree field of view includes several evolved HII regions as well as
-younger regions containing masers.  It will simplify the cleaning
-process considerably if we can subtract the continuum and image it
-separately from the line emission.  Lets have a look at a spectrum and
-see if we can establish the continuum baseline.  In the case of these
-masers, the emission is so strong that we can see it in individual
-integrations, however you need to be careful because there are also
-weaker features less than one Jy.  In the case of weaker sources, we
-would need to average together all of the data in order to spot the
-emission. This works well only if the source is close to the phase
-centre and not too extended.  The best way is to make a dirty cube and
-examine this through the viewer in order to determine line channels. In
-the case of extremely weak line sources you may even need to do some
-cleaning first before you can identify the lines.
+This particular field is of a massive star formation region.  The one degree field of view includes
+several evolved HII regions as well as younger regions containing masers.  It will simplify the
+cleaning process considerably if we can subtract the continuum and image it separately from the line
+emission.  Lets have a look at a spectrum and see if we can establish the continuum baseline.  In the
+case of these masers, the emission is so strong that we can see it in individual integrations, however
+you need to be careful because there are also weaker features less than one Jy.  In the case of weaker
+sources, we would need to average together all of the data in order to spot the emission. This works
+well only if the source is close to the phase centre and not too extended.  The best way is to make a
+dirty cube and examine this through the viewer in order to determine line channels. In the case of
+extremely weak line sources you may even need to do some cleaning first before you can identify the
+lines.
 
 Lets have a quick look at the averaged spectrum.
 
@@ -2225,12 +2188,10 @@ plotms(vis=cvel_outputvis,
 \end{verbatim}
 \end{casacmd}
 
-There may be some emission around the last channels. It also turns out
-that this plot does not show sufficient detail to figure out where the
-line emission is.  It will be much better to make a dirty cube first and
-inspect the result to determine where we can place the continuum
-windows. To make a dirty cube, we simple set the number of iterations of
-CLEAN to zero.
+There may be some emission around the last channels. It also turns out that this plot does not show
+sufficient detail to figure out where the line emission is.  It will be much better to make a dirty
+cube first and inspect the result to determine where we can place the continuum windows. To make a
+dirty cube, we simple set the number of iterations of CLEAN to zero.
 
 \begin{casacmd}
 \begin{verbatim}
@@ -2251,13 +2212,11 @@ viewer('dirty.image')
 \end{verbatim}
 \end{casacmd}
 
-We have a reduced channel range in this dataset in order to keep the
-file sizes down, and as a result most of the channels contain line
-emission.  Continuum subtraction is a lot easier in the original 4096
-channel dataset.  Careful examination of the cube will show that the
-only line-free channels are around 280 to 340. The continuum subtraction
-task will issue a warning about extrapolating over the outer frequency
-ranges but will still do it.
+We have a reduced channel range in this dataset in order to keep the file sizes down, and as a result
+most of the channels contain line emission.  Continuum subtraction is a lot easier in the original
+4096 channel dataset.  Careful examination of the cube will show that the only line-free channels are
+around 280 to 340. The continuum subtraction task will issue a warning about extrapolating over the
+outer frequency ranges but will still do it.
 
 \begin{casacmd}
 \begin{verbatim}
@@ -2269,26 +2228,21 @@ uvcontsub(vis=cvel_outputvis,
 \end{verbatim}
 \end{casacmd}
 
-Now you have two new measurement sets, one containing the continuum
-data, which you can image as usual, and one containing the spectral
-data.  We do not expect to see any absorption features in this field, so
-if you do see negative features, it may mean that the continuum
-subtraction has failed. You can check this before going on to the
-laborious task of deconvolution by making a dirty cube of the
+Now you have two new measurement sets, one containing the continuum data, which you can image as
+usual, and one containing the spectral data.  We do not expect to see any absorption features in this
+field, so if you do see negative features, it may mean that the continuum subtraction has failed. You
+can check this before going on to the laborious task of deconvolution by making a dirty cube of the
 continuum-subtracted data.
 
 
 \section{Finally, on to imaging}
 
-Now we can start cleaning the spectral line cube.  Masers typically have
-angular sizes of the order of milli-arcseconds and therefore  are not
-resolved with KAT-7.  However, there are five individual sources of
-maser emission in this field of view.  Lets start the cleaning process.
-You will notice that we still specify the rest frequency even though we
-have already set it in the measurement set.  This is because of some
-inconsistencies in the way CASA handles spectral velocities - for now it
-is safer to always specify the rest frequencies and the required output
-frame.
+Now we can start cleaning the spectral line cube.  Masers typically have angular sizes of the order of
+milli-arcseconds and therefore  are not resolved with KAT-7.  However, there are five individual
+sources of maser emission in this field of view.  Lets start the cleaning process.  You will notice
+that we still specify the rest frequency even though we have already set it in the measurement set.
+This is because of some inconsistencies in the way CASA handles spectral velocities - for now it is
+safer to always specify the rest frequencies and the required output frame.
 
 \begin{casacmd}
 \begin{verbatim}
@@ -2314,13 +2268,12 @@ clean(vis = contsub_vis,
 \end{verbatim}
 \end{casacmd}
 
-If you find you are running out of time, try setting interactive to
-False and let CASA find its own way.
+If you find you are running out of time, try setting interactive to False and let CASA find its own
+way.
 
-Optional: Try cleaning the continuum.  Below are the commands to start
-the continuum cleaning.  Note that I have dropped the last 11 channels
-to get rid of the empty channels that we were left with after {\tt
-CVEL}.
+Optional: Try cleaning the continuum.  Below are the commands to start the continuum cleaning.  Note
+that I have dropped the last 11 channels to get rid of the empty channels that we were left with after
+{\tt CVEL}.
 
 \begin{casacmd}
 \begin{verbatim}
@@ -2341,25 +2294,20 @@ clean(vis=cont_vis,
 \end{verbatim}
 \end{casacmd}
 
-You will notice that this field has a pretty complex structure,
-consisting of point sources as well as more nebulous evolved HII
-regions. It is far better to clean this image using multi-scale clean,
-which will fit for several size-scales. To set up multi-scale, we need
-to specify the scales, in number of pixels, where 0 indicates a point
-source, 5 pixels is about one beam, and then we do a few multiples of
-the beam, going up to 4 times the beam in this case.   Note that CASA
-will complain if the scales are too large and then drop them.   If doing
-the cleaning non-interactively, it is good to also tell CASA to stop
-when it starts creating too many negative components, otherwise things
-can go wrong very quickly.
+You will notice that this field has a pretty complex structure, consisting of point sources as well as
+more nebulous evolved HII regions. It is far better to clean this image using multi-scale clean, which
+will fit for several size-scales. To set up multi-scale, we need to specify the scales, in number of
+pixels, where 0 indicates a point source, 5 pixels is about one beam, and then we do a few multiples
+of the beam, going up to 4 times the beam in this case.   Note that CASA will complain if the scales
+are too large and then drop them.   If doing the cleaning non-interactively, it is good to also tell
+CASA to stop when it starts creating too many negative components, otherwise things can go wrong very
+quickly.
 
-\caution{Warning: multiscale clean is a lot slower than the conventional clean
-because it repeats the clean cycle for every scale specified and needs
-to re-scale the psf for every scale.  When setting this task to
-non-interactive mode, and trying to clean down to 5 times the expected
-rms noise, this takes almost 3 hours on a high-end desktop machine. This
-is also why we try to subtract the continuum off in the uv-plane, since
-it speeds up imaging the OH masers considerably.
+\caution{Warning: multiscale clean is a lot slower than the conventional clean because it repeats the
+clean cycle for every scale specified and needs to re-scale the psf for every scale.  When setting
+this task to non-interactive mode, and trying to clean down to 5 times the expected rms noise, this
+takes almost 3 hours on a high-end desktop machine. This is also why we try to subtract the continuum
+off in the uv-plane, since it speeds up imaging the OH masers considerably.
 }
 
 \begin{casacmd}
@@ -2388,12 +2336,10 @@ clean(vis=cont_vis,
 \section{Getting help}
 \label{sec:getting-help}
 
-In casapy, you can type {\tt help [commandname]} to get help in a
-particular command.
+In casapy, you can type {\tt help [commandname]} to get help in a particular command.
 
-If you've encountered a problem, have a question, or would like to
-report a bug, please send an email to our mailing list or visit our
-website.
+If you've encountered a problem, have a question, or would like to report a bug, please send an email
+to our mailing list or visit our website.
 
 \backmatter
 
