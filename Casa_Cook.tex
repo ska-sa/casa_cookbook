@@ -15,8 +15,8 @@
 
 % Book metadata
 % \title{CASA for Dummies:\\ A KAT-7 Data Reduction Guide}
-\title{An Introduction to CASA:\\ A KAT-7 Data Reduction Guide}
-\author[Nadeem Oozeer]{Nadeem Oozeer, Michael Bietenholz \& Sharmila Goedhart}
+\title{Introduction to CASA: \\ A KAT-7 Data Reduction Guide}
+\author[Nadeem Oozeer]{N. Oozeer, M. Bietenholz \& S. Goedhart}
 
 \usepackage{casadoc}
 
@@ -915,7 +915,8 @@ attempts at calibration from them.
 \bigskip
 \pause{ Time to take a break and have some coffee... The steps after will need more attention.}
 
-\medskip
+% \medskip
+\bigskip
 
 There are few sources whose flux density is known reliably which can be used as primary amplitude
 calibrators.  The task {\tt setjy} knows about the most common of these, and will insert the correct
@@ -1719,9 +1720,8 @@ flagdata(vis = msfile,
 
 \section{Set up models for the calibrators}
 
-Now lets prepare the file for calibration.  This step will clear all
-previous calibrations or, if it is a freshly made ms file, will add in
-the MODEL and CORRECTED DATA columns.
+Now lets prepare the file for calibration.  This step will clear all previous calibrations or, if it
+is a freshly made ms file, will add in the MODEL and CORRECTED DATA columns.
 
 \begin{casacmd}
 \begin{verbatim}
@@ -1729,8 +1729,7 @@ clearcal(msfile)
 \end{verbatim}
 \end{casacmd}
 
-Now we are going to set up models for our calibrators.  First, we set up
-our flux calibrator:
+Now we are going to set up models for our calibrators.  First, we set up our flux calibrator:
 
 \begin{casacmd}
 \begin{verbatim}
@@ -1741,12 +1740,11 @@ setjy(vis = msfile,
 \end{verbatim}
 \end{casacmd}
 
-PKS 1613-586 is not a very good calibrator, but it is difficult to find
-isolated sources close to the Galactic Plane.  Instead, we use a model
-of the field, found by imaging the calibrator. You should have the
-directory {\tt 1613-586.model} in your working directory.  This is a
-CASA model file, which is produced by CLEAN.  This will populate the
-MODEL column for the source with the appropriate visibilities.
+PKS 1613-586 is not a very good calibrator, but it is difficult to find isolated sources close to the
+Galactic Plane.  Instead, we use a model of the field, found by imaging the calibrator. You should
+have the directory {\tt 1613-586.model} in your working directory.  This is a CASA model file, which
+is produced by CLEAN.  This will populate the MODEL column for the source with the appropriate
+visibilities.
 
 \begin{casacmd}
 \begin{verbatim}
@@ -1760,13 +1758,11 @@ setjy(vis = msfile,
 
 \section{Calibration}
 
-We first do a preliminary time-dependent phase calibration over a subset
-of the band.  We have to find a small section of the band that is
-reasonably flat, and have enough bandwidth to achieve a reasonable
-signal-to-noise.  The number of channels is going to depend on the total
-bandwidth of the observation.  In this case, we are using  1/4 of the
-total channels in the 1.5 MHz mode and don't expect to see much change
-across the bandpass.
+We first do a preliminary time-dependent phase calibration over a subset of the band.  We have to find
+a small section of the band that is reasonably flat, and have enough bandwidth to achieve a reasonable
+signal-to-noise.  The number of channels is going to depend on the total bandwidth of the observation.
+In this case, we are using  1/4 of the total channels in the 1.5 MHz mode and don't expect to see much
+change across the bandpass.
 
 \begin{casacmd}
 \begin{verbatim}
